@@ -10,7 +10,13 @@ resource "azurerm_kubernetes_cluster" "aks_k2" {
   dns_prefix          = var.dns_name
   kubernetes_version  = var.kubernetes_version
 
-  dynamic "agent_pool_profile" {
+  default_node_pool {
+    name            = "agentpool"
+    node_count      = var.agent_count
+    vm_size         = "Standard_D2_v2"
+    }
+
+/*   default_node_pool {
     for_each = var.agent_pools
     iterator = pool
     content {
@@ -23,7 +29,7 @@ resource "azurerm_kubernetes_cluster" "aks_k2" {
       max_pods        = 100
       vnet_subnet_id  = azurerm_subnet.aks_subnet.id
     }
-  }
+  } */
 
   linux_profile {
     admin_username = var.admin_username
