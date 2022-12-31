@@ -16,6 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks_k2" {
     vm_size         = "Standard_D2_v2"
     }
 
+
 /*   default_node_pool {
     for_each = var.agent_pools
     iterator = pool
